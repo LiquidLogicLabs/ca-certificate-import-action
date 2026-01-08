@@ -8,14 +8,9 @@
     "url": "https://github.com/LiquidLogicLabs/ca-certificate-import-action.git"
   },
   "scripts": {
-    "release": "standard-version --release-as patch && git push --follow-tags origin HEAD",
-    "release:patch": "standard-version --release-as patch && git push --follow-tags origin HEAD",
-    "release:minor": "standard-version --release-as minor && git push --follow-tags origin HEAD",
-    "release:major": "standard-version --release-as major && git push --follow-tags origin HEAD",
-    "release:pre-alpha": "standard-version --prerelease alpha && git push --follow-tags origin HEAD",
-    "release:pre-beta": "standard-version --prerelease beta && git push --follow-tags origin HEAD",
-    "release:pre-rc": "standard-version --prerelease rc && git push --follow-tags origin HEAD",
-    "release:pre-dev": "standard-version --prerelease patch --prereleaseId dev && git push --follow-tags origin HEAD",
+    "release:patch": "standard-version --release-as patch --skip.changelog && git push --follow-tags",
+    "release:minor": "standard-version --release-as minor --skip.changelog && git push --follow-tags",
+    "release:major": "standard-version --release-as major --skip.changelog && git push --follow-tags",
     "build": "echo 'Build completed - action is ready for packaging'",
     "test": "act -j test",
     "test:local": "act -j test --local",
@@ -24,14 +19,6 @@
   },
   "devDependencies": {
     "standard-version": "^9.5.0"
-  },
-  "standard-version": {
-    "scripts": {
-      "precommit": "git add CHANGELOG.md package.json"
-    },
-    "skip": {
-      "tag": false
-    }
   },
   "engines": {
     "node": ">=16.0.0"
