@@ -1,9 +1,0 @@
-{
-  "name": "ca-certificate-import-action",
-  "version": "dev",
-  "build_date": "2025-10-17T13:15:52Z",
-  "git_sha": "79d906233812843cd116176187370e9574955082",
-  "git_ref": "main",
-  "platform": "Linux",
-  "node_version": "18"
-}
