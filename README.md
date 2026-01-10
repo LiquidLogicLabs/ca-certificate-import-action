@@ -1,5 +1,8 @@
 # CA Certificate Import GitHub Action
 
+[![CI](https://github.com/LiquidLogicLabs/git-action-ca-certificate-import/actions/workflows/ci.yml/badge.svg)](https://github.com/LiquidLogicLabs/git-action-ca-certificate-import/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A GitHub Action that installs custom SSL/TLS certificates into the CI/CD runner environment, enabling Docker and other tools to work with private registries and internal resources that use custom certificate authorities.
 
 ## Features
@@ -137,22 +140,36 @@ This action follows [Semantic Versioning](https://semver.org/).
 uses: LiquidLogicLabs/git-action-ca-certificate-import@v1  # Gets latest v1.x.x
 ```
 
-## 🚀 Quick Release
+**Version pinning options:**
+- `@v1` - Latest v1.x.x (major version)
+- `@v1.1` - Latest v1.1.x (minor version)
+- `@latest` - Latest stable release
+- `@v1.1.3` - Exact version
 
-```bash
-npm run release:patch      # Bug fixes
-npm run release:minor      # New features  
-npm run release:major      # Breaking changes
-```
+## Security
 
-See [docs/MAINTAINERS.md](docs/MAINTAINERS.md) for full release automation guide.
+### Security Considerations
+
+- **Certificate Validation**: The action validates that certificates are in valid PEM format before installation
+- **System Access**: Requires `sudo` privileges to write to `/usr/local/share/ca-certificates/` and run `update-ca-certificates`
+- **Certificate Source**: Always verify the source of certificates, especially when using URLs or inline content
+- **Secrets Management**: When using inline certificates, store the certificate content in GitHub Secrets and reference via `${{ secrets.CERT_NAME }}`
+- **Network Security**: URL-based certificate downloads use standard `curl` with TLS verification enabled
+
+### Best Practices
+
+- ✅ Use GitHub Secrets for sensitive certificate content
+- ✅ Verify certificate fingerprints before installation
+- ✅ Use specific version tags (`@v1.1.3`) in production workflows
+- ✅ Regularly update to the latest stable version for security patches
+- ⚠️ Avoid committing certificates directly to repositories
+- ⚠️ Use organization-approved certificate sources only
 
 ## Documentation
 
 - 📖 [Examples](docs/EXAMPLES.md) - Comprehensive usage examples
 - 🔧 [Troubleshooting](docs/TROUBLESHOOTING.md) - Common issues and solutions
-- 🛠️ [Contributing](docs/CONTRIBUTING.md) - Development guidelines
-- 👥 [Maintainers](docs/MAINTAINERS.md) - Publishing, testing, and release automation
+- 🛠️ [Development](docs/DEVELOPMENT.md) - Development setup, contributing guidelines, and release procedures
 
 ## Troubleshooting
 
@@ -160,7 +177,7 @@ Having issues? Check the [Troubleshooting Guide](docs/TROUBLESHOOTING.md) for co
 
 ## Contributing
 
-Contributions welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Contributions welcome! See [DEVELOPMENT.md](docs/DEVELOPMENT.md) for development setup and contribution guidelines.
 
 ## License
 
